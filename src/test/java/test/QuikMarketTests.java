@@ -1,5 +1,7 @@
 package test;
 
+import org.junit.After;
+import org.junit.Before;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -7,7 +9,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.Test;
 import pageobject_model.page.HomePage;
 import pageobject_model.page.LoginPage;
 
@@ -26,7 +28,7 @@ public class QuikMarketTests {
     private String myTradeNumber = "MB1000100002";
     private String tradeNumberAfter;
 
-    @BeforeMethod(alwaysRun = true)
+    @Before
     public void browserSetup() {
         options = new ChromeOptions();
         options.setPageLoadStrategy(PageLoadStrategy.NONE);
@@ -45,7 +47,7 @@ public class QuikMarketTests {
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
     }
 
-    @Test(description = "create ticket with limits")
+    @Test
     public  void createNewTicketWithLimits() throws InterruptedException {
         driver.get("https://junior.webquik.ru/");
         Thread.sleep(10000);
@@ -70,7 +72,7 @@ public class QuikMarketTests {
         Assert.assertEquals(tradeNumberAfter,"MB1000100002");
     }
 
-    @Test(description = "create ticket with stop option")
+    @Test
     public  void createNewTicketWithMarketablePrice() throws InterruptedException {
         driver.get("https://junior.webquik.ru/");
         Thread.sleep(10000);
@@ -88,7 +90,7 @@ public class QuikMarketTests {
         Assert.assertEquals(tradeNumberAfter,myTradeNumber);
     }
 
-    @AfterMethod(alwaysRun = true)
+    @After
     public void browserShutDown() {
         driver.quit();
         driver = null;
