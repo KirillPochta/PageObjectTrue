@@ -27,6 +27,10 @@ public class QuikMarketTests {
     private String myTradeNumber = "MB1000100002";
     private String tradeNumberAfter;
 
+    public void setDriver() {
+        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+    }
+
     @Before
     public void browserSetup() {
         options = new ChromeOptions();
@@ -43,14 +47,13 @@ public class QuikMarketTests {
                 TimeUnit.MILLISECONDS);
         driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 
-        System.setProperty("webdriver.chrome.driver",
-                Objects.requireNonNull(getClass().getClassLoader().getResource("drivers/chromedriver.exe")).getFile() );
+       setDriver();
     }
 
     @Test
     public  void createNewTicketWithLimits() throws InterruptedException {
         driver.get("https://junior.webquik.ru/");
-        Thread.sleep(10000);
+        Thread.sleep(20000);
 
         loginPageObj = new LoginPage(driver);
         loginPageObj.singIntoSystemAsUser("U0193146","08134");

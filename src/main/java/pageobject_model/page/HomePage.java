@@ -53,6 +53,32 @@ public  class HomePage {
     @FindBy(xpath = "//td[@colspan='3']//input[@tabindex='16']")
     private WebElement setStopTicket;
 
+    @FindBy(xpath = "//a[contains(@style,'0px; margin: 0px; width: 154px;')]")
+    private WebElement setMarkettypeOfTicket;
+
+
+    @FindBy(xpath = "//table[contains(@style,'margin: 10px 0px; table-layout: auto;')]/tbody/tr/td[last()]/div")
+    private WebElement sumOfTransactionMrketTypeOfTicket;
+
+    @FindBy(xpath = "//table[@style='position: absolute; top: 0px; width: 1200px;']/tbody/tr[last()]/td[4]")
+    private WebElement nameOfLotAfterSendticket;
+
+    @FindBy(xpath = "//table[@style='position: absolute; top: 0px; width: 1200px;']/tbody/tr[last()]/td[7]")
+    private WebElement costForTicketAfterSubmit;
+
+    @FindBy(xpath = "//table[@style='position: absolute; top: 0px; width: 1200px;']/tbody/tr[last()]/td[8]")
+    private WebElement numberOfLotsToBuyAfterSendingTIcket;
+
+    @FindBy(xpath = "//a[@style=\"right: auto; left: 38px; margin: 0px; top: 0px; width: 180px;\"]")
+    private WebElement addNewInstrument;
+
+    @FindBy(xpath = "//table[@style=\"width: 100%; table-layout: fixed;\"]/tbody/tr/td/input[@style=\"padding-right: 20px !important; width: 100%; height: 28px;\"]")
+    private WebElement inputNameOfLotInFiledOFAddNewInstrument;
+
+    @FindBy(xpath = "//table[@style=\"width: 251px;\"]/tbody/tr[last()]/td[1]/div")
+    private WebElement nameOfIntrumentAfterAddNewInstrument;
+
+
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -61,12 +87,12 @@ public  class HomePage {
     }
 
     protected static WebElement waitForElementToBeClickable(WebDriver driver, WebElement element) {
-        return new WebDriverWait(driver, 30)
+        return new WebDriverWait(driver, 100)
                 .until(ExpectedConditions.elementToBeClickable(element));
     }
 
     protected static WebElement waitForVisibilityOfElement(WebDriver driver, WebElement element) {
-        return new WebDriverWait(driver, 30)
+        return new WebDriverWait(driver, 100)
                 .until(ExpectedConditions.visibilityOf(element));
     }
 

@@ -26,12 +26,12 @@ public class LoginPage {
     }
 
     protected static WebElement waitForElementToBeClickable(WebDriver driver, WebElement element) {
-        return new WebDriverWait(driver, 40)
+        return new WebDriverWait(driver, 100)
                 .until(ExpectedConditions.elementToBeClickable(element));
     }
 
     protected static WebElement waitForVisibilityOfElement(WebDriver driver, WebElement element) {
-        return new WebDriverWait(driver, 40)
+        return new WebDriverWait(driver, 100)
                 .until(ExpectedConditions.visibilityOf(element));
     }
 
