@@ -11,6 +11,7 @@ import org.junit.Test;
 import pageobject_model.page.HomePage;
 import pageobject_model.page.LoginPage;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class QuikMarketTests {
@@ -42,7 +43,8 @@ public class QuikMarketTests {
                 TimeUnit.MILLISECONDS);
         driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 
-        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver",
+                Objects.requireNonNull(getClass().getClassLoader().getResource("drivers/chromedriver.exe")).getFile() );
     }
 
     @Test
