@@ -42,7 +42,6 @@ public class LoginPage {
 
         loginFiled.sendKeys(login);
         passwordField.sendKeys(password);
-        Thread.sleep(2000);
         signButton.click();
     }
 }

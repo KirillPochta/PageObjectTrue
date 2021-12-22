@@ -21,11 +21,24 @@ public class QuikMarketTests {
     private LoginPage loginPageObj;
     private HomePage homePage;
 
-    private String timeBeforeTicket;
-    private String timeAfterTicket;
+    private String nameOfLotBeforeSubmit = "CNYRUB_SPT";
+    private String nameOfLotAfterTocketSend;
 
-    private String myTradeNumber = "MB1000100002";
-    private String tradeNumberAfter;
+    private String costToPayForTicketBefore;
+    private String costToPayForTicketAfter;
+
+    private String timeBeforeTicketSending;
+    private String timeAfterTicketSending;
+
+    private String numberOfLotsBeforeTicketSend = "5";
+    private String costPerInstrument = "0.000100";
+    private String numberOfLotsAfterTicketSend;
+    private String costPerInstrumentAfterTicketSend;
+    private String nameOfNewInstrument = "CNYRUB_SPT";
+    private String getNameOfNewInstumentAfterSubmit;
+
+
+
 
     public void setDriver() {
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
@@ -36,6 +49,7 @@ public class QuikMarketTests {
         options = new ChromeOptions();
         options.setPageLoadStrategy(PageLoadStrategy.NONE);
         options.addArguments("start-maximized");
+        options.addArguments("--auto-open-devtools-for-tabs");
 
 
         driver = new ChromeDriver(options);
@@ -53,45 +67,93 @@ public class QuikMarketTests {
     @Test
     public  void createNewTicketWithLimits() throws InterruptedException {
         driver.get("https://junior.webquik.ru/");
-        Thread.sleep(20000);
+        Thread.sleep(15000);
 
         loginPageObj = new LoginPage(driver);
         loginPageObj.singIntoSystemAsUser("U0193146","08134");
 
         homePage = new HomePage(driver);
-
-        timeBeforeTicket = homePage.setDateBeforTicketCreation();
-
+        timeBeforeTicketSending = homePage.getTimeBeforTicketSend();
         homePage.openWindowOfCreationTicket();
-        homePage.fillFieldsOnTicketWindow("CNYRUB_SPT","5","1");
+        homePage.fillFieldsOnTicketWindow(nameOfLotBeforeSubmit,numberOfLotsBeforeTicketSend,costPerInstrument);
+
+        costToPayForTicketBefore = homePage.getSumOfTransactionOfLimitTicketBeforTicketSend();
 
         homePage.pressSubmitTicketButton();
-        tradeNumberAfter = homePage.tradeNumberAfterSubmit();
         homePage.sendOfCretedTicketButton();
 
-        timeAfterTicket = homePage.setDateAfterTicketCreation();
 
-        Assert.assertNotEquals(timeBeforeTicket,timeAfterTicket);
-        Assert.assertEquals(tradeNumberAfter,"MB1000100002");
+        nameOfLotAfterTocketSend = homePage.getNameOfLotAfterSubmit();
+        costToPayForTicketAfter = homePage.getSumForTicketAfterSubmit();
+        numberOfLotsAfterTicketSend = homePage.getCountOfLotsAfterTicketSend();
+        costPerInstrumentAfterTicketSend = homePage.getCostPerIntrumentAfterSubmit();
+        timeAfterTicketSending = homePage.getTimeAfterTicketSend();
+
+        Thread.sleep(20000);
+
+        Assert.assertEquals(nameOfLotBeforeSubmit,nameOfLotAfterTocketSend);
+        Assert.assertEquals(costToPayForTicketBefore,costToPayForTicketAfter);
+        Assert.assertNotEquals(timeBeforeTicketSending,timeAfterTicketSending);
+        Assert.assertEquals(numberOfLotsBeforeTicketSend,numberOfLotsAfterTicketSend);
+        Assert.assertEquals(costPerInstrument,costPerInstrumentAfterTicketSend);
     }
 
     @Test
     public  void createNewTicketWithMarketablePrice() throws InterruptedException {
         driver.get("https://junior.webquik.ru/");
-        Thread.sleep(10000);
+        Thread.sleep(15000);
 
         loginPageObj = new LoginPage(driver);
         loginPageObj.singIntoSystemAsUser("U0193146","08134");
 
         homePage = new HomePage(driver);
+        timeBeforeTicketSending = homePage.getTimeBeforTicketSend();
         homePage.openWindowOfCreationTicket();
-        homePage.fillFieldsOnTicketWindow("CNYRUB_SPT","5","1");
+
+        homePage.fillFieldsOnTicketWindow(nameOfLotBeforeSubmit,numberOfLotsBeforeTicketSend,costPerInstrument);
+
+        costToPayForTicketBefore = homePage.getSumOfTransactionOfLimitTicketBeforTicketSend();
+
         homePage.setStopTicketMethod();
         homePage.pressSubmitTicketButton();
-        tradeNumberAfter = homePage.tradeNumberAfterSubmit();
         homePage.sendOfCretedTicketButton();
-        Assert.assertEquals(tradeNumberAfter,myTradeNumber);
+
+
+        timeAfterTicketSending = homePage.getTimeAfterTicketSend();
+        nameOfLotAfterTocketSend = homePage.getNameOfLotAfterSubmit();
+        costToPayForTicketAfter = homePage.getSumForTicketAfterSubmit();
+        numberOfLotsAfterTicketSend = homePage.getCountOfLotsAfterTicketSend();
+        costPerInstrumentAfterTicketSend = homePage.getCostPerIntrumentAfterSubmit();
+
+        Thread.sleep(20000);
+
+        Assert.assertEquals(nameOfLotBeforeSubmit,nameOfLotAfterTocketSend);
+        Assert.assertEquals(costToPayForTicketBefore,costToPayForTicketAfter);
+        Assert.assertNotEquals(timeBeforeTicketSending,timeAfterTicketSending);
+        Assert.assertEquals(numberOfLotsBeforeTicketSend,numberOfLotsAfterTicketSend);
+        Assert.assertEquals(costPerInstrument,costPerInstrumentAfterTicketSend);
     }
+
+    /*@Test
+    public  void addingNewInstrument() throws InterruptedException {
+        driver.get("https://junior.webquik.ru/");
+        Thread.sleep(15000);
+
+        loginPageObj = new LoginPage(driver);
+        loginPageObj.singIntoSystemAsUser("U0193146","08134");
+
+        homePage = new HomePage(driver);
+
+        homePage.addNewInstrumentButtonClick();
+        homePage.inputNameOfNewInstrument(nameOfNewInstrument);
+        Thread.sleep(5000);
+        homePage.selectElementOfAddingListOfNewInstument();
+
+
+        getNameOfNewInstumentAfterSubmit = homePage.getNameOfNewInstumentAfterSubmit();
+    }
+
+     */
 
     @After
     public void browserShutDown() {

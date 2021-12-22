@@ -30,9 +30,12 @@ public  class HomePage {
     @FindBy(xpath = "//td[contains(@class,'x-form-tr')]//input[contains(@tabindex,'11')]")
     private WebElement costForInstrument; //1
 
+    @FindBy(xpath = "//table[@style='position: absolute; top: 0px; width: 1200px;']/tbody/tr[last()]/td[7]")
+    private WebElement costForInstrumentAfterTicketSend; //1
+
     @FindBy(xpath = "//table[contains(@style,'195px; top: 25px')]//div[contains(@role,'input')]")
-    private WebElement sumOfTransactionBeforeSubmit;
-    //*[@id="submitBtn2-btnIconEl"]
+    private WebElement sumOfTransactionOfLimitTicketBeforeSubmit;
+
     @FindBy(xpath = "//a[@tabindex=41]//span[contains(@style,'height: 19px')]//span[contains(@id,'submit')]//span[@role='img']")
     private WebElement submitTicketButton;
 
@@ -44,11 +47,11 @@ public  class HomePage {
     private WebElement tradeNumberAfterSubmitTicket;
 
 
-    @FindBy(xpath = "//div[contains(@style,'left: 706px; margin: 0px')]")
+    @FindBy(xpath = "//div[contains(@style,'968')]/div[6]")
     private WebElement timeBeforeTicketCreate;
 
-    @FindBy(xpath = "//div[contains(@style,'left: 706px; margin: 0px')]")
-    private WebElement timeAfterTicketCreate;
+    @FindBy(xpath = "//table[@style='position: absolute; top: 0px; width: 1200px;']/tbody/tr[last()]/td[2]")
+    private WebElement timeAfterTicketSend;
 
     @FindBy(xpath = "//td[@colspan='3']//input[@tabindex='16']")
     private WebElement setStopTicket;
@@ -63,20 +66,23 @@ public  class HomePage {
     @FindBy(xpath = "//table[@style='position: absolute; top: 0px; width: 1200px;']/tbody/tr[last()]/td[4]")
     private WebElement nameOfLotAfterSendticket;
 
-    @FindBy(xpath = "//table[@style='position: absolute; top: 0px; width: 1200px;']/tbody/tr[last()]/td[7]")
+    @FindBy(xpath = "//table[@style='position: absolute; top: 0px; width: 1200px;']/tbody/tr[last()]/td[9]")
     private WebElement costForTicketAfterSubmit;
 
     @FindBy(xpath = "//table[@style='position: absolute; top: 0px; width: 1200px;']/tbody/tr[last()]/td[8]")
     private WebElement numberOfLotsToBuyAfterSendingTIcket;
 
     @FindBy(xpath = "//a[@style=\"right: auto; left: 38px; margin: 0px; top: 0px; width: 180px;\"]")
-    private WebElement addNewInstrument;
+    private WebElement addNewInstrumentButton;
 
     @FindBy(xpath = "//table[@style=\"width: 100%; table-layout: fixed;\"]/tbody/tr/td/input[@style=\"padding-right: 20px !important; width: 100%; height: 28px;\"]")
     private WebElement inputNameOfLotInFiledOFAddNewInstrument;
 
     @FindBy(xpath = "//table[@style=\"width: 251px;\"]/tbody/tr[last()]/td[1]/div")
     private WebElement nameOfIntrumentAfterAddNewInstrument;
+
+    @FindBy(xpath = "//ul[@class=\"x-list-plain\"]/li[2]")
+    private WebElement clickOnElementInListOfAddingOfNewInstument;
 
 
 
@@ -101,24 +107,67 @@ public  class HomePage {
         newTicketButton.click();
     }
 
-    public String setDateBeforTicketCreation() {
-        return timeBeforeTicketCreate.getText();
-    }
-
-    public String setDateAfterTicketCreation() {
-        return timeAfterTicketCreate.getText();
-    }
-
     public void setStopTicketMethod() {
         waitForElementToBeClickable(driver,setStopTicket);
         setStopTicket.click();
     }
 
-    public String tradeNumberAfterSubmit() {
-        return tradeNumberAfterSubmitTicket.getText();
+   public void addNewInstrumentButtonClick() {
+        waitForElementToBeClickable(driver,addNewInstrumentButton);
+       addNewInstrumentButton.click();
+    }
+    public void selectElementOfAddingListOfNewInstument() {
+        waitForElementToBeClickable(driver,clickOnElementInListOfAddingOfNewInstument);
+        clickOnElementInListOfAddingOfNewInstument.click();
     }
 
-    public void fillFieldsOnTicketWindow(String nameOfLot, String countOfLots, String costPerInstruments) {
+    public void inputNameOfNewInstrument(String nameOfInstument) {
+        waitForVisibilityOfElement(driver,inputNameOfLotInFiledOFAddNewInstrument);
+        inputNameOfLotInFiledOFAddNewInstrument.sendKeys(nameOfInstument + Keys.ENTER);
+    }
+
+    public String getNameOfNewInstumentAfterSubmit() {
+        waitForVisibilityOfElement(driver, nameOfIntrumentAfterAddNewInstrument);
+        return nameOfIntrumentAfterAddNewInstrument.getText();
+    }
+
+     public String getNameOfLotAfterSubmit() {
+         waitForVisibilityOfElement(driver, nameOfLotAfterSendticket);
+         return nameOfLotAfterSendticket.getText();
+    }
+
+    public String getSumOfTransactionOfLimitTicketBeforTicketSend() {
+        waitForVisibilityOfElement(driver, sumOfTransactionOfLimitTicketBeforeSubmit);
+        return sumOfTransactionOfLimitTicketBeforeSubmit.getText();
+    }
+
+    public String getSumForTicketAfterSubmit() {
+        waitForVisibilityOfElement(driver, costForTicketAfterSubmit);
+        return costForTicketAfterSubmit.getText();
+    }
+
+    public String getCostPerIntrumentAfterSubmit() {
+        waitForVisibilityOfElement(driver, costForInstrumentAfterTicketSend);
+        return costForInstrumentAfterTicketSend.getText();
+    }
+
+    public String getCountOfLotsAfterTicketSend() {
+        waitForVisibilityOfElement(driver, numberOfLotsToBuyAfterSendingTIcket);
+        return numberOfLotsToBuyAfterSendingTIcket.getText();
+    }
+
+    public String getTimeBeforTicketSend() {
+        waitForVisibilityOfElement(driver, timeBeforeTicketCreate);
+        return timeBeforeTicketCreate.getText();
+    }
+
+    public String getTimeAfterTicketSend() {
+        waitForVisibilityOfElement(driver, timeAfterTicketSend);
+        return timeAfterTicketSend.getText();
+    }
+
+
+    public void fillFieldsOnTicketWindow(String nameOfLot, String countOfLots, String costPerInstruments) throws InterruptedException {
         waitForVisibilityOfElement(driver, tradeNumber);
         waitForVisibilityOfElement(driver, inputNameOfLot);
         waitForVisibilityOfElement(driver, numberOfLotsToBuy);
@@ -138,15 +187,7 @@ public  class HomePage {
 
     public void sendOfCretedTicketButton() {
         waitForElementToBeClickable(driver, sendTicketButton);
-        waitForVisibilityOfElement(driver, tradeNumberAfterSubmitTicket);
         sendTicketButton.click();
     }
 
-    public String getExpectedTradeNumber() {
-        return tradeNumberAfterSubmitTicket.getText();
-    }
-
-    public String getActualTradeNumber() {
-        return tradeNumber.getText();
-    }
 }
