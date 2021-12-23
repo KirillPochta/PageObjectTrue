@@ -2,13 +2,10 @@ package test;
 
 import org.junit.After;
 import org.junit.Before;
-import org.openqa.selenium.By;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import org.junit.Test;
 import pageobject_model.page.HomePage;
@@ -69,21 +66,16 @@ public class QuikMarketTests {
 
     @Test
     public  void createNewTicketWithLimits() throws InterruptedException {
-
         driver.get("https://junior.webquik.ru/");
-        Thread.sleep(15000);
+        Thread.sleep(20000);
 
         loginPageObj = new LoginPage(driver);
-        loginPageObj.singIntoSystemAsUser("U0193146","08134");
+        loginPageObj.singIntoSystemAsUser("U0193146","07181");
 
         homePage = new HomePage(driver);
         //timeBeforeTicketSending = homePage.getTimeBeforTicketSend();
-        //homePage.openWindowOfCreationTicket();
-        Thread.sleep(5000);
-        WebElement newTicketButton = driver.findElement(By.xpath("//span[contains(@style,'two-fingers')]"));
-        newTicketButton.click();
-
-                homePage.fillFieldsOnTicketWindow(nameOfLotBeforeSubmit,numberOfLotsBeforeTicketSend,costPerInstrument);
+        homePage.openWindowOfCreationTicket();
+        homePage.fillFieldsOnTicketWindow(nameOfLotBeforeSubmit,numberOfLotsBeforeTicketSend,costPerInstrument);
 
         costToPayForTicketBefore = homePage.getSumOfTransactionOfLimitTicketBeforTicketSend();
 
@@ -97,7 +89,7 @@ public class QuikMarketTests {
         costPerInstrumentAfterTicketSend = homePage.getCostPerIntrumentAfterSubmit();
         //timeAfterTicketSending = homePage.getTimeAfterTicketSend();
 
-        Thread.sleep(20000);
+        Thread.sleep(5000);
 
         Assert.assertEquals(nameOfLotBeforeSubmit,nameOfLotAfterTocketSend);
         Assert.assertEquals(costToPayForTicketBefore,costToPayForTicketAfter);
@@ -109,10 +101,10 @@ public class QuikMarketTests {
     @Test
     public  void createNewTicketWithMarketablePrice() throws InterruptedException {
         driver.get("https://junior.webquik.ru/");
-        Thread.sleep(15000);
+        Thread.sleep(20000);
 
         loginPageObj = new LoginPage(driver);
-        loginPageObj.singIntoSystemAsUser("U0193146","08134");
+        loginPageObj.singIntoSystemAsUser("U0193146","07181");
 
         homePage = new HomePage(driver);
         //timeBeforeTicketSending = homePage.getTimeBeforTicketSend();
@@ -133,7 +125,7 @@ public class QuikMarketTests {
         numberOfLotsAfterTicketSend = homePage.getCountOfLotsAfterTicketSend();
         costPerInstrumentAfterTicketSend = homePage.getCostPerIntrumentAfterSubmit();
 
-        Thread.sleep(20000);
+        Thread.sleep(5000);
 
         Assert.assertEquals(nameOfLotBeforeSubmit,nameOfLotAfterTocketSend);
         Assert.assertEquals(costToPayForTicketBefore,costToPayForTicketAfter);
