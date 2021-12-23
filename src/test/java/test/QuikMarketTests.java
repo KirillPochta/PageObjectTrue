@@ -67,7 +67,7 @@ public class QuikMarketTests {
     @Test
     public  void createNewTicketWithLimits() throws InterruptedException {
         driver.get("https://junior.webquik.ru/");
-
+        Thread.sleep(20000);
 
         loginPageObj = new LoginPage(driver);
         loginPageObj.singIntoSystemAsUser("U0193146","07181");
@@ -82,7 +82,7 @@ public class QuikMarketTests {
         homePage.pressSubmitTicketButton();
         homePage.sendOfCretedTicketButton();
 
-
+        Thread.sleep(5000);
 
         nameOfLotAfterTocketSend = homePage.getNameOfLotAfterSubmit();
         costToPayForTicketAfter = homePage.getSumForTicketAfterSubmit();
@@ -99,7 +99,7 @@ public class QuikMarketTests {
     @Test
     public  void createNewTicketWithMarketablePrice() throws InterruptedException {
         driver.get("https://junior.webquik.ru/");
-
+        Thread.sleep(20000);
 
         loginPageObj = new LoginPage(driver);
         loginPageObj.singIntoSystemAsUser("U0193146","07181");
@@ -115,7 +115,7 @@ public class QuikMarketTests {
         homePage.pressSubmitTicketButton();
         homePage.sendOfCretedTicketButton();
 
-        
+        Thread.sleep(5000);
 
         nameOfLotAfterTocketSend = homePage.getNameOfLotAfterSubmit();
         costToPayForTicketAfter = homePage.getSumForTicketAfterSubmit();
