@@ -36,7 +36,7 @@ public  class HomePage {
     @FindBy(xpath = "//table[contains(@style,'195px; top: 25px')]//div[contains(@role,'input')]")
     private WebElement sumOfTransactionOfLimitTicketBeforeSubmit;
 
-    @FindBy(xpath = "//a[@tabindex=41]//span[contains(@style,'height: 19px')]//span[contains(@id,'submit')]//span[@role='img']")
+    @FindBy(xpath = "//a[@tabindex=41]//span[contains(@style,'height: 19px')]/span/span[2]")
     private WebElement submitTicketButton;
 
     @FindBy(xpath = "//a[contains(@style,'left: 271px; top: 0px;')]//span[contains(@style,'height: 19px')]//span[@role='img'][1]")
