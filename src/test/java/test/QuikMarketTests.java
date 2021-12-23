@@ -2,10 +2,13 @@ package test;
 
 import org.junit.After;
 import org.junit.Before;
+import org.openqa.selenium.By;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import org.junit.Test;
 import pageobject_model.page.HomePage;
@@ -66,6 +69,7 @@ public class QuikMarketTests {
 
     @Test
     public  void createNewTicketWithLimits() throws InterruptedException {
+
         driver.get("https://junior.webquik.ru/");
         Thread.sleep(15000);
 
@@ -74,8 +78,12 @@ public class QuikMarketTests {
 
         homePage = new HomePage(driver);
         //timeBeforeTicketSending = homePage.getTimeBeforTicketSend();
-        homePage.openWindowOfCreationTicket();
-        homePage.fillFieldsOnTicketWindow(nameOfLotBeforeSubmit,numberOfLotsBeforeTicketSend,costPerInstrument);
+        //homePage.openWindowOfCreationTicket();
+        Thread.sleep(5000);
+        WebElement newTicketButton = driver.findElement(By.xpath("//span[contains(@style,'two-fingers')]"));
+        newTicketButton.click();
+
+                homePage.fillFieldsOnTicketWindow(nameOfLotBeforeSubmit,numberOfLotsBeforeTicketSend,costPerInstrument);
 
         costToPayForTicketBefore = homePage.getSumOfTransactionOfLimitTicketBeforTicketSend();
 
