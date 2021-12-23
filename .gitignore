@@ -5,6 +5,6 @@ target
 manual.iml
 
 
-resources/Drivers/chromedriver.exe
+chromedriver.exe
 
 
