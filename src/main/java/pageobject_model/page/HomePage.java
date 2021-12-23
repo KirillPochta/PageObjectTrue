@@ -12,7 +12,7 @@ public  class HomePage {
 
     private WebDriver driver;
 
-    @FindBy(xpath = "//span[contains(@style,'two-fingers')]")
+    @FindBy(xpath = "//a[@style=\"right: auto; left: 832px; margin: 0px; top: 4px;\"]")
     private WebElement newTicketButton;
 
     @FindBy(xpath = "//input[contains(@tabindex,'5')]")

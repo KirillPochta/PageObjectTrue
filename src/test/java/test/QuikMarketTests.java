@@ -82,18 +82,16 @@ public class QuikMarketTests {
         homePage.pressSubmitTicketButton();
         homePage.sendOfCretedTicketButton();
 
+        Thread.sleep(5000);
 
         nameOfLotAfterTocketSend = homePage.getNameOfLotAfterSubmit();
         costToPayForTicketAfter = homePage.getSumForTicketAfterSubmit();
         numberOfLotsAfterTicketSend = homePage.getCountOfLotsAfterTicketSend();
         costPerInstrumentAfterTicketSend = homePage.getCostPerIntrumentAfterSubmit();
-        //timeAfterTicketSending = homePage.getTimeAfterTicketSend();
 
-        Thread.sleep(5000);
 
         Assert.assertEquals(nameOfLotBeforeSubmit,nameOfLotAfterTocketSend);
         Assert.assertEquals(costToPayForTicketBefore,costToPayForTicketAfter);
-        //Assert.assertNotEquals(timeBeforeTicketSending,timeAfterTicketSending);
         Assert.assertEquals(numberOfLotsBeforeTicketSend,numberOfLotsAfterTicketSend);
         Assert.assertEquals(costPerInstrument,costPerInstrumentAfterTicketSend);
     }
@@ -107,7 +105,6 @@ public class QuikMarketTests {
         loginPageObj.singIntoSystemAsUser("U0193146","07181");
 
         homePage = new HomePage(driver);
-        //timeBeforeTicketSending = homePage.getTimeBeforTicketSend();
         homePage.openWindowOfCreationTicket();
 
         homePage.fillFieldsOnTicketWindow(nameOfLotBeforeSubmit,numberOfLotsBeforeTicketSend,costPerInstrument);
@@ -118,18 +115,16 @@ public class QuikMarketTests {
         homePage.pressSubmitTicketButton();
         homePage.sendOfCretedTicketButton();
 
+        Thread.sleep(5000);
 
-        //timeAfterTicketSending = homePage.getTimeAfterTicketSend();
         nameOfLotAfterTocketSend = homePage.getNameOfLotAfterSubmit();
         costToPayForTicketAfter = homePage.getSumForTicketAfterSubmit();
         numberOfLotsAfterTicketSend = homePage.getCountOfLotsAfterTicketSend();
         costPerInstrumentAfterTicketSend = homePage.getCostPerIntrumentAfterSubmit();
 
-        Thread.sleep(5000);
 
         Assert.assertEquals(nameOfLotBeforeSubmit,nameOfLotAfterTocketSend);
         Assert.assertEquals(costToPayForTicketBefore,costToPayForTicketAfter);
-        //Assert.assertNotEquals(timeBeforeTicketSending,timeAfterTicketSending);
         Assert.assertEquals(numberOfLotsBeforeTicketSend,numberOfLotsAfterTicketSend);
         Assert.assertEquals(costPerInstrument,costPerInstrumentAfterTicketSend);
     }
